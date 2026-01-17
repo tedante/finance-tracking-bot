@@ -1,6 +1,6 @@
 const { Telegraf } = require('telegraf');
-const config = require('./src/config');
-const { handleTransactionCommand, handleCategorySelection } = require('./src/handlers/transactions');
+const config = require('./config/index');
+const { handleTransactionCommand, handleCategorySelection } = require('./handlers/transactions');
 
 // Initialize bot
 const bot = new Telegraf(config.botToken);

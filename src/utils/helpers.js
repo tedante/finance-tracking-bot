@@ -1,5 +1,5 @@
 function formatCurrency(amount) {
-  return `$${amount.toLocaleString('en-US')}`;
+  return `Rp${amount.toLocaleString('id-ID')}`;
 }
 
 function parseCommandArgs(text) {
