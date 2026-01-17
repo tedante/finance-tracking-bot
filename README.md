@@ -77,12 +77,23 @@ GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYour-Private-Key-Here\n-----END
    - The key will be downloaded
 6. Copy the `client_email` and `private_key` from the downloaded JSON to your `.env` file
 7. Create a Google Spreadsheet with the following columns:
+
    - Tanggal (Date)
    - Tipe (Type)
    - Nominal (Amount)
    - Deskripsi (Description)
    - Kategori (Category)
    - User
+
+   **Example spreadsheet structure:**
+
+   | Tanggal                | Tipe    | Nominal | Deskripsi           | Kategori  | User |
+   | ---------------------- | ------- | ------- | ------------------- | --------- | ---- |
+   | 1/17/2026, 10:30:00 AM | Expense | 50      | Lunch at restaurant | Food      | John |
+   | 1/17/2026, 2:45:00 PM  | Expense | 20      | Taxi to office      | Transport | Jane |
+   | 1/17/2026, 6:00:00 PM  | Income  | 1000    | Monthly salary      | Shopping  | John |
+   | 1/17/2026, 8:15:00 PM  | Expense | 150     | Electric bill       | Utilities | Jane |
+
 8. Share the spreadsheet with the service account email (the one in `GOOGLE_SERVICE_ACCOUNT_EMAIL`)
 9. Copy the spreadsheet ID from the URL and add it to your `.env` file
 
