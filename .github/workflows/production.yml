@@ -24,6 +24,6 @@ jobs:
             git pull origin main
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            npm install --production
-            pm2 restart family-bot || pm2 start index.js --name "family-bot"
+            npm install
+            pm2 restart finance-tracking-bot || pm2 start npm --name "finance-tracking-bot" -- start
             pm2 save

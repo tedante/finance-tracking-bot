@@ -77,7 +77,6 @@ GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYour-Private-Key-Here\n-----END
    - The key will be downloaded
 6. Copy the `client_email` and `private_key` from the downloaded JSON to your `.env` file
 7. Create a Google Spreadsheet with the following columns:
-
    - Tanggal (Date)
    - Tipe (Type)
    - Nominal (Amount)
@@ -102,7 +101,7 @@ GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYour-Private-Key-Here\n-----END
 ### Start the Bot
 
 ```bash
-npm start
+npm run start
 ```
 
 ### Commands
@@ -133,6 +132,117 @@ After sending a command, the bot will show category buttons. Select the appropri
 - 🛍️ Shopping
 
 You can easily add more categories by editing [`src/constants/categories.js`](src/constants/categories.js).
+
+## Production Deployment
+
+### Prerequisites for Production
+
+- A server or hosting platform (VPS, cloud instance, etc.)
+- Node.js installed on the server
+- PM2 or similar process manager for keeping the bot running
+- All environment variables properly configured
+
+### Option 1: Using PM2
+
+PM2 is a production process manager that keeps your bot running continuously and restarts it automatically if it crashes.
+
+1. Install PM2 globally:
+
+```bash
+npm install -g pm2
+```
+
+2. Start the bot with PM2:
+
+```bash
+pm2 start npm --name "finance-tracking-bot" -- start
+```
+
+3. Save the PM2 process list to restart on server reboot:
+
+```bash
+pm2 save
+pm2 startup
+```
+
+4. Useful PM2 commands:
+
+```bash
+# View bot status and logs
+pm2 status
+pm2 logs family-finance-bot
+
+# Restart the bot
+pm2 restart family-finance-bot
+
+# Stop the bot
+pm2 stop family-finance-bot
+
+# Monitor in real-time
+pm2 monit
+```
+
+### Option 2: Docker Deployment
+
+1. Create a `Dockerfile` in the project root:
+
+```dockerfile
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci --only=production
+
+COPY . .
+
+CMD ["node", "src/index.js"]
+```
+
+2. Create a `.dockerignore` file:
+
+```
+node_modules
+.env
+.git
+.gitignore
+README.md
+```
+
+3. Build and run the Docker container:
+
+```bash
+# Build the image
+docker build -t family-finance-bot .
+
+# Run the container
+docker run -d \
+  --name family-finance-bot \
+  --restart unless-stopped \
+  --env-file .env \
+  family-finance-bot
+```
+
+4. Using Docker Compose (optional):
+
+Create a `docker-compose.yml`:
+
+```yaml
+version: "3.8"
+services:
+  bot:
+    build: .
+    container_name: family-finance-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+```
+
+Then run:
+
+```bash
+docker-compose up -d
+```
 
 ## Project Structure
 
