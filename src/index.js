@@ -11,6 +11,9 @@ bot.command(['out', 'in'], handleTransactionCommand);
 // Handle button clicks for category selection
 bot.action(/cat_(.+)_(.+)/, handleCategorySelection);
 
+// Ignore header button clicks (group separators)
+bot.action(/header_(.+)/, (ctx) => ctx.answerCbQuery());
+
 // Launch bot
 bot.launch().then(() => {
   console.log('🚀 Bot started successfully!');
