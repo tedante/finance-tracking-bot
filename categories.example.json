@@ -1,0 +1,50 @@
+[
+  {
+    "name": "L-Fixed",
+    "icon": "🏠",
+    "key": "L-FIXED",
+    "group": "Living"
+  },
+  {
+    "name": "L-Variable",
+    "icon": "🛒",
+    "key": "L-VARIABLE",
+    "group": "Living"
+  },
+  {
+    "name": "Social",
+    "icon": "🎁",
+    "key": "SOCIAL",
+    "group": "Lifestyle"
+  },
+  {
+    "name": "Wants",
+    "icon": "🎮",
+    "key": "WANTS",
+    "group": "Lifestyle"
+  },
+  {
+    "name": "Self-Care",
+    "icon": "💆",
+    "key": "SELF-CARE",
+    "group": "Lifestyle"
+  },
+  {
+    "name": "Emergency",
+    "icon": "🆘",
+    "key": "EMERGENCY",
+    "group": "Future"
+  },
+  {
+    "name": "Investment",
+    "icon": "📈",
+    "key": "INVESTMENT",
+    "group": "Future"
+  },
+  {
+    "name": "Sinking Fund",
+    "icon": "🎯",
+    "key": "SINKING_FUND",
+    "group": "Future"
+  }
+]
