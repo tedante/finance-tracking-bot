@@ -30,7 +30,13 @@ cd family-finance-bot
 npm install
 ```
 
-3. Create a `.env` file in the root directory:
+3. Copy the example configuration files:
+
+```bash
+cp categories.example.json categories.json
+```
+
+4. Create a `.env` file in the root directory:
 
 ```env
 BOT_TOKEN="your-telegram-bot-token"
@@ -124,14 +130,35 @@ Example: `/in 1000 Monthly salary`
 
 After sending a command, the bot will show category buttons. Select the appropriate category to complete the transaction.
 
-### Available Categories
+### Customizing Categories
+
+The bot uses a `categories.json` file to define available transaction categories. Each user can customize their own categories:
+
+1. Edit `categories.json` in the root directory:
+
+```json
+[
+  { "name": "Food", "icon": "🍕", "key": "Food" },
+  { "name": "Transport", "icon": "🚗", "key": "Transport" },
+  { "name": "Utilities", "icon": "⚡", "key": "Utilities" },
+  { "name": "Shopping", "icon": "🛍️", "key": "Shopping" },
+  { "name": "Healthcare", "icon": "🏥", "key": "Healthcare" }
+]
+```
+
+2. Each category object requires:
+   - `name`: Display name of the category
+   - `icon`: Emoji icon for the category
+   - `key`: Unique identifier for the category
+
+3. Restart the bot after making changes
+
+The default categories are:
 
 - 🍕 Food
 - 🚗 Transport
 - ⚡ Utilities
 - 🛍️ Shopping
-
-You can easily add more categories by editing [`src/constants/categories.js`](src/constants/categories.js).
 
 ## Production Deployment
 
@@ -252,7 +279,7 @@ family-finance-bot/
 │   ├── config/
 │   │   └── index.js              # Configuration and environment variables
 │   ├── constants/
-│   │   └── categories.js         # Transaction categories
+│   │   └── categories.js         # Categories loader
 │   ├── handlers/
 │   │   └── transactions.js       # Bot command and action handlers
 │   ├── services/
@@ -260,31 +287,30 @@ family-finance-bot/
 │   ├── utils/
 │   │   └── helpers.js            # Utility functions
 │   └── index.js                  # Application entry point
+├── categories.json               # Your categories (not in git)
+├── categories.example.json       # Example categories template
 ├── .env                          # Environment variables (not in git)
 ├── package.json
 └── README.md
 ```
 
-## Adding New Categories
+## Customizing Your Setup
 
-Edit [`src/constants/categories.js`](src/constants/categories.js):
+### Categories
 
-```javascript
-const categories = [
-  { name: "Food", icon: "🍕", key: "Food" },
-  { name: "Transport", icon: "🚗", key: "Transport" },
-  { name: "Utilities", icon: "⚡", key: "Utilities" },
-  { name: "Shopping", icon: "🛍️", key: "Shopping" },
-  { name: "Healthcare", icon: "🏥", key: "Healthcare" }, // Add new category
-];
-```
+Each installation can have its own set of categories by editing `categories.json`. See the "Customizing Categories" section above for details.
+
+### Environment Variables
+
+All configuration is done through the `.env` file and `categories.json`, making it easy for different users to customize the bot without changing code.
 
 ## Security Notes
 
 - Keep your `.env` file secure and never commit it to version control
-- Add `.env` to your `.gitignore` file
+- Add `.env` and `categories.json` to your `.gitignore` file (already configured)
 - The bot only responds to messages from the configured `ALLOWED_GROUP_ID`
 - Your Google Service Account credentials should be kept confidential
+- Customize `categories.json` for your needs - it won't be committed to git
 
 ## Troubleshooting
 

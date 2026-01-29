@@ -1,11 +1,19 @@
 const { Markup } = require('telegraf');
+const fs = require('fs');
+const path = require('path');
 
-const categories = [
-  { name: 'Food', icon: '🍕', key: 'Food' },
-  { name: 'Transport', icon: '🚗', key: 'Transport' },
-  { name: 'Utilities', icon: '⚡', key: 'Utilities' },
-  { name: 'Shopping', icon: '🛍️', key: 'Shopping' },
-];
+// Load categories from JSON file
+const categoriesPath = path.join(__dirname, '../../categories.json');
+let categories = [];
+
+try {
+  const categoriesData = fs.readFileSync(categoriesPath, 'utf8');
+  categories = JSON.parse(categoriesData);
+} catch (error) {
+  console.error('Error loading categories.json:', error.message);
+  console.error('Please copy categories.example.json to categories.json');
+  process.exit(1);
+}
 
 function getCategoryKeyboard(messageId) {
   const buttons = categories.map(cat =>
